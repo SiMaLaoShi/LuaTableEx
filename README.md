@@ -111,3 +111,6 @@ print("=============================================")
 {sweetness=1,class={}}
 ```
 
+## 引用
+
+[middleclass](https://github.com/kikito/middleclass)
