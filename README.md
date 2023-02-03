@@ -20,6 +20,7 @@ print(table.toJson(t))
 local fKey = function()
 end
 local boolKey = true
+local tKey = {}
 local t = {
     [1] = "hello",
     ['2'] = "hello",
@@ -32,7 +33,8 @@ local t = {
         ["desc"] = 'hello',
         ["fKey"] = 'hello',
         ['boolKey'] = "hello",
-    }
+    },
+    [tKey] = 100
 }
 ```
 
@@ -41,9 +43,9 @@ local t = {
 ```json
 {
 	[true] = 'hello',
+	['table: 00AA8C58'] = 100,
 	['2'] = 'hello',
 	[1] = 'hello',
-	['function: 00AB1DB8'] = 'hello',
 	[2] = {
 		['2'] = 'hello',
 		[1] = 'hello',
@@ -51,6 +53,7 @@ local t = {
 		['fKey'] = 'hello',
 		['desc'] = 'hello',
 	},
+	['function: 00C78800'] = 'hello',
 	['desc'] = 'hello',
 }
 ```
@@ -58,7 +61,7 @@ local t = {
 #### table.tostring
 
 ```lua
-{true="hello",2="hello",[1]=hello,[function: 00AB1DB8]=hello,[2]=table: 00ABC358,desc="hello"}
+{true="hello",['table: 00AA8C58']=100,2="hello",[1]="hello",[2]={2="hello",[1]="hello",boolKey="hello",fKey="hello",desc="hello"},['function: 00C78800']="hello",desc="hello"}
 ```
 
 ### table中带mt的演示效果，这里使用的是 [middleclass](https://github.com/kikito/middleclass)

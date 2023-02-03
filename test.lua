@@ -3,6 +3,7 @@ require("helpfunc")
 local fKey = function()
 end
 local boolKey = true
+local tKey = {}
 local t = {
     [1] = "hello",
     ['2'] = "hello",
@@ -15,7 +16,8 @@ local t = {
         ["desc"] = 'hello',
         ["fKey"] = 'hello',
         ['boolKey'] = "hello",
-    }
+    },
+    [tKey] = 100
 }
 
 ------------------------------------------
