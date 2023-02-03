@@ -1,5 +1,5 @@
 require("table_ex")
-
+require("helpfunc")
 local fKey = function()
 end
 local boolKey = true
@@ -17,6 +17,7 @@ local t = {
         ['boolKey'] = "hello",
     }
 }
+
 ------------------------------------------
 print("纯表格 ==》Json")
 print(table.toJson(t))
@@ -50,5 +51,5 @@ print("class ==》Json")
 print(table.toJson(lemon))
 print("=============================================")
 print("class ==》string")
-print(table.toJson(lemon))
+print(table.tostring(lemon))
 print("=============================================")

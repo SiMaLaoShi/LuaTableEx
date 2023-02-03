@@ -1,5 +1,4 @@
 local type = type
-local pairs = pairs
 local tostring = tostring
 local format = string.format
 local getmetatable = getmetatable
@@ -91,46 +90,40 @@ table.toJson = function(t)
     return dump_table(t, 0)
 end
 
-local function __table_tostring (t)
-    local function __tostring(val)
-        if type(val)=='table' then
-            return __table_tostring(val)
-        elseif type(val)=='string' then
-            return "\"" .. tostring(val) .. "\""
-        else
-            return tostring(val)
-        end
+function __tostring(val)
+    if type(val) == 'table' then
+        return __table_tostring(val)
+    elseif type(val) == 'string' then
+        return "\"" .. tostring(val) .. "\""
+    else
+        return tostring(val)
     end
+end
 
-    if t == nil or _G.next(t) == nil then
-        return "{}"
-    end
+function __table_tostring(t)
     local s = "{"
     local i = 1
-    for k, v in pairs(t) do
+    for k, v in mt_pairs(t) do
         local signal = ","
         if i == 1 then
             signal = ""
         end
         if type(k) == 'number' then
-            s = s .. signal .. '[' .. k .. "]=" .. __tostring(v)
+            s = s .. signal .. '[' .. k .. "]=" .. tostring(v)
         elseif type(k) == 'function' then
-            s = s .. signal .. '[' .. tostring_key(k) .. "]=" .. __tostring(v)
+            s = s .. signal .. '[' .. tostring_key(k) .. "]=" .. tostring(v)
         else
             s = s .. signal .. (tostring(k)) .. "=" .. __tostring(v)
         end
-            i = i + 1
-        end
+        i = i + 1
+    end
     s = s .. "}"
     return s
 end
 
-table.tostring = function(val)
-    if type(val)=='table' then
-        return __table_tostring(val)
-    elseif type(val)=='string' then
-        return "\"" .. tostring(val) .. "\""
-    else
-        return tostring(val)
+table.tostring = function(t)
+    if t == nil or _G.next(t) == nil then
+        return "{}"
     end
+    return __table_tostring(t)
 end
